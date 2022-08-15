@@ -9,6 +9,8 @@ MAP_HEIGTH = 15
 NUM_OF_MAP_FRUITS = 10
 
 my_position = [6, 3]
+tail_length = 0
+tail = []
 map_fruits = []
 
 # Generate random fruits on the map
@@ -31,10 +33,14 @@ while True:
                 if fruit[POS_X] == coordinate_x and fruit[POS_Y] == coordinate_y:
                     char_to_draw = "*"
                     fruit_in_cell = fruit
+            for tail_unit in tail:
+                if tail_unit[POS_X] == coordinate_x and tail_unit[POS_Y] == coordinate_y:
+                    char_to_draw = "@"
             if my_position[POS_X] == coordinate_x and my_position[POS_Y] == coordinate_y:
                 char_to_draw = "@"
                 if fruit_in_cell:
                     map_fruits.remove(fruit_in_cell)
+                    tail_length += 1
             print(" {} ".format(char_to_draw), end="")
         print("|")
     print("+" + "-" * (MAP_WIDTH * 3) + "+")
@@ -44,15 +50,23 @@ while True:
     direction = readchar.readchar()
 
     if direction.lower() == "w":
+        tail.insert(0, my_position.copy())
+        tail = tail[:tail_length]
         my_position[POS_Y] -= 1
         my_position[POS_Y] %= MAP_HEIGTH
     elif direction.lower() == "s":
+        tail.insert(0, my_position.copy())
+        tail = tail[:tail_length]
         my_position[POS_Y] += 1
         my_position[POS_Y] %= MAP_HEIGTH
     elif direction.lower() == "a":
+        tail.insert(0, my_position.copy())
+        tail = tail[:tail_length]
         my_position[POS_X] -= 1
         my_position[POS_X] %= MAP_WIDTH
     elif direction.lower() == "d":
+        tail.insert(0, my_position.copy())
+        tail = tail[:tail_length]
         my_position[POS_X] += 1
         my_position[POS_X] %= MAP_WIDTH
     elif direction.lower() == "q":
