@@ -25,17 +25,22 @@ while True:
     print("+" + "-" * (MAP_WIDTH * 3) + "+")
 
     # Ask user where he wants to move
+    print("Utilice \"WASD\" para moverse \n\"Q\" para salir")
     direction = readchar.readchar()
 
-    if direction == "w":
+    if direction.lower() == "w":
         my_position[POS_Y] -= 1
-    elif direction == "s":
+        my_position[POS_Y] %= MAP_HEIGTH
+    elif direction.lower() == "s":
         my_position[POS_Y] += 1
-    elif direction == "a":
+        my_position[POS_Y] %= MAP_HEIGTH
+    elif direction.lower() == "a":
         my_position[POS_X] -= 1
-    elif direction == "d":
+        my_position[POS_X] %= MAP_WIDTH
+    elif direction.lower() == "d":
         my_position[POS_X] += 1
-    elif direction == "q":
+        my_position[POS_X] %= MAP_WIDTH
+    elif direction.lower() == "q":
         break
 
     os.system("clear")
