@@ -6,20 +6,20 @@ POS_X = 0
 POS_Y = 1
 MAP_WIDTH = 20
 MAP_HEIGTH = 15
+NUM_OF_MAP_FRUITS = 10
 
 my_position = [6, 3]
 map_fruits = []
 
-for x in range(10):
-    fruit_position = []
-    x = random.randint(0, MAP_WIDTH)
-    fruit_position.append(x)
-    y = random.randint(0, MAP_HEIGTH)
-    fruit_position.append(y)
-    map_fruits.append(fruit_position)
+# Generate random fruits on the map
+while len(map_fruits) < NUM_OF_MAP_FRUITS:
+    new_fruit_position = [random.randint(
+        0, MAP_WIDTH-1), random.randint(0, MAP_HEIGTH-1)]
+    if new_fruit_position not in map_fruits and new_fruit_position != my_position:
+        map_fruits.append(new_fruit_position)
 
+# Main loop
 while True:
-
     #   Draw Map
     print("+" + "-" * (MAP_WIDTH * 3) + "+")
     for coordinate_y in range(MAP_HEIGTH):
